@@ -1,4 +1,10 @@
-com/example/springboot/Application.java
- com.example.springboot.Application
 com/example/springboot/HelloController.java
  com.example.springboot.HelloController
+com/example/springboot/Repository/LocationRepository.java
+ com.example.springboot.LocationRepository
+com/example/springboot/Application.java
+ com.example.springboot.Application
+com/example/springboot/Controllers/LocationController.java
+ com.example.springboot.LocationController
+com/example/springboot/Models/Location.java
+ com.example.springboot.Location
