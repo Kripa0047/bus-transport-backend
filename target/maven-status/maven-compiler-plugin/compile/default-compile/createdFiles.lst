@@ -1,5 +1,9 @@
 com\example\springboot\LocationController.class
+com\example\springboot\BusRepository.class
 com\example\springboot\Location.class
 com\example\springboot\LocationRepository.class
+com\example\springboot\AdminController.class
 com\example\springboot\Application.class
+com\example\springboot\Bus.class
+com\example\springboot\BusController.class
 com\example\springboot\HelloController.class

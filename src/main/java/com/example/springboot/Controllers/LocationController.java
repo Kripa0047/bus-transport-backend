@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 
 @RestController
 public class LocationController {
@@ -15,13 +16,21 @@ public class LocationController {
 	@Autowired
   	private LocationRepository repository;
 
+	@Value("${admin.token}")
+    private String adminToken;
+
 	@GetMapping("/location/add-new")
-	public String addNewLocation(@RequestParam String location) {
+	public JSONObject addNewLocation(@RequestParam String location, @RequestParam String token) {
 		JSONObject res=new JSONObject();
 		try	{
-			repository.save(new Location(location));
-			res.put("message","Location added");
-			res.put("status",true);
+			if(adminToken.equals(token)){
+				repository.save(new Location(location));
+				res.put("message","Location added");
+				res.put("status",true);
+			}else {
+				res.put("message","Invalid token");
+				res.put("status",false);
+			}
         }  
         catch(ArithmeticException e)	{  
             System.out.println(e);
@@ -29,18 +38,20 @@ public class LocationController {
 			res.put("status",false); 
         }   
  
-		return res.toJSONString();
+		return res;
 	}
 
 	@GetMapping("/location")
-	public String getAllLocation() {
-		List<String> data = new ArrayList<>();
+	public JSONObject getAllLocation() {
+		List<String> locations = new ArrayList<>();
 		JSONObject res=new JSONObject();
 
 		try	{
 			for (Location location : repository.findAll()) {
-				data.add(location.name);
+				locations.add(location.name);
 			}
+			JSONObject data=new JSONObject();
+			data.put("locations",locations);
 			res.put("message","Location Fetched");
 			res.put("status",true);
 			res.put("data",data);
@@ -51,7 +62,7 @@ public class LocationController {
 			res.put("status",false);
         }   
 
-		return res.toString();
+		return res;
 	}
 
 }
