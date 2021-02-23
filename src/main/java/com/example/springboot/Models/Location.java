@@ -12,6 +12,8 @@ public class Location {
   public String id;
   public String name;
 
+  public Location() {}
+
   public Location(String name) {
     this.name = name;
   }
