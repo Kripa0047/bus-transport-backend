@@ -25,8 +25,12 @@ public class LocationController {
 		JSONObject res=new JSONObject();
 		try	{
 			if(adminToken.equals(token)){
-				repository.save(new Location(location));
+				Location newLocation = repository.save(new Location(location));
+				JSONObject data = new JSONObject();
+				data.put("id", newLocation.id);
+				data.put("location", newLocation.name);
 				res.put("message","Location added");
+				res.put("data", data);
 				res.put("status",true);
 			}else {
 				res.put("message","Invalid token");
