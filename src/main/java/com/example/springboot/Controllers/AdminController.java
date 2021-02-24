@@ -24,7 +24,7 @@ public class AdminController {
     private String adminToken;
 
 	@GetMapping("/login")
-	public String login(@RequestParam String email, @RequestParam String pass) {
+	public JSONObject login(@RequestParam String email, @RequestParam String pass) {
 		JSONObject res=new JSONObject();
 
         if(adminEmail.equals(email) && adminPass.equals(pass)){
@@ -40,7 +40,7 @@ public class AdminController {
 			res.put("status",false); 
         }
  
-		return res.toJSONString();
+		return res;
 	}
 
 }
